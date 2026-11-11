@@ -23,13 +23,13 @@ jobs:
           gradle-version: '8.9'
       - name: Build release APK
         run: gradle --no-daemon :app:assembleRelease
-      - name: Verify APK exists and report size
+      - name: Verify APK and report size
         run: |
-          test -s app/build/outputs/apk/release/app-release-unsigned.apk
-          stat -c 'APK size: %s bytes' app/build/outputs/apk/release/app-release-unsigned.apk
+          test -s app/build/outputs/apk/release/app-release.apk
+          stat -c 'APK size: %s bytes' app/build/outputs/apk/release/app-release.apk
       - uses: actions/upload-artifact@v4
         with:
           name: NewLauncher-release-apk
-          path: app/build/outputs/apk/release/*.apk
+          path: app/build/outputs/apk/release/app-release.apk
           if-no-files-found: error
           retention-days: 14
