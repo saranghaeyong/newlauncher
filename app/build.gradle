@@ -14,6 +14,9 @@ android {
 
     buildTypes {
         release {
+            // Debug key makes CI output directly installable for testing.
+            // Replace with a private release key before public distribution.
+            signingConfig signingConfigs.debug
             minifyEnabled true
             shrinkResources true
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
