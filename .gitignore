@@ -1,7 +1,8 @@
-node_modules/
-build/
-dist/
-coverage/
+.gradle/
+**/build/
+local.properties
+*.iml
+.idea/
 .DS_Store
 *.log
 .env*
