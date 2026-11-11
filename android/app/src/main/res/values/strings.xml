@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">DEADPOOL HOME</string>
+    <string name="clock_placeholder">21:45</string>
+    <string name="date_placeholder">TUESDAY · NOV 11</string>
+    <string name="all_apps">All Apps</string>
+    <string name="wifi_settings">Wi-Fi Settings</string>
+    <string name="tv_inputs">TV Inputs</string>
+    <string name="system_settings">System Settings</string>
+</resources>

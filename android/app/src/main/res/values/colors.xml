@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Deadpool AMOLED Palette -->
+    <color name="amoled_black">#050505</color>
+    <color name="deadpool_red">#D00F1F</color>
+    <color name="deadpool_crimson">#990000</color>
+    <color name="deadpool_dark_crimson">#4D0008</color>
+    <color name="deadpool_focus_glow">#B3D00F1F</color>
+    <color name="glass_bubble_bg">#33FFFFFF</color>
+    <color name="glass_bubble_stroke">#1FFFFFFF</color>
+    <color name="text_primary">#F5F5F7</color>
+    <color name="text_secondary">#8E8E93</color>
+</resources>

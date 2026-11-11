@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="Theme.DeadpoolHome.NoActionBar" parent="Theme.AppCompat.NoActionBar">
+        <item name="android:windowBackground">@color/amoled_black</item>
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:windowFullscreen">true</item>
+        <item name="android:windowContentOverlay">@null</item>
+        <item name="android:colorBackground">@color/amoled_black</item>
+    </style>
+
+    <style name="Theme.DeadpoolHome.Wallpaper" parent="Theme.DeadpoolHome.NoActionBar">
+        <item name="android:windowShowWallpaper">false</item>
+    </style>
+</resources>

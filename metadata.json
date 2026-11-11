@@ -1,0 +1,6 @@
+{
+  "name": "DEADPOOL HOME - Minimal Android TV Launcher",
+  "description": "Premium minimal single-homescreen Android TV launcher inspired by Deadpool's sleek black-and-crimson identity with floating glass app bubbles and D-pad remote navigation.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

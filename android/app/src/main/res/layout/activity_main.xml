@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/amoled_black"
+    android:padding="48dp">
+
+    <!-- Top Left: Digital Clock & Date -->
+    <LinearLayout
+        android:id="@+id/ll_clock_container"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/tv_clock"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="sans-serif-thin"
+            android:text="21:45"
+            android:textColor="@color/text_primary"
+            android:textSize="54sp" />
+
+        <TextView
+            android:id="@+id/tv_date"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="sans-serif-medium"
+            android:letterSpacing="0.08"
+            android:text="TUESDAY · NOV 11"
+            android:textColor="@color/deadpool_red"
+            android:textSize="12sp" />
+    </LinearLayout>
+
+    <!-- Top Right: System Status & Shortcuts -->
+    <LinearLayout
+        android:id="@+id/ll_system_status"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentTop="true"
+        android:background="#22FFFFFF"
+        android:orientation="horizontal"
+        android:padding="8dp">
+
+        <ImageButton
+            android:id="@+id/btn_wifi_shortcut"
+            android:layout_width="36dp"
+            android:layout_height="36dp"
+            android:background="?selectableItemBackgroundBorderless"
+            android:contentDescription="Wi-Fi"
+            android:focusable="true" />
+
+        <ImageButton
+            android:id="@+id/btn_inputs_shortcut"
+            android:layout_width="36dp"
+            android:layout_height="36dp"
+            android:layout_marginStart="12dp"
+            android:background="?selectableItemBackgroundBorderless"
+            android:contentDescription="Inputs"
+            android:focusable="true" />
+
+        <ImageButton
+            android:id="@+id/btn_settings_shortcut"
+            android:layout_width="36dp"
+            android:layout_height="36dp"
+            android:layout_marginStart="12dp"
+            android:background="?selectableItemBackgroundBorderless"
+            android:contentDescription="Settings"
+            android:focusable="true" />
+    </LinearLayout>
+
+    <!-- Center: Floating Circular App Bubble Dock -->
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rv_app_dock"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:clipToPadding="false"
+        android:focusable="true"
+        android:orientation="horizontal"
+        android:paddingStart="40dp"
+        android:paddingEnd="40dp" />
+
+</RelativeLayout>
