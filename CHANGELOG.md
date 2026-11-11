@@ -10,42 +10,58 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased]
 
 ### Added
-- **Quick Access Panel** — Three pill buttons (Inputs | WiFi | Settings) in top-right corner
-- **Greeting system** — "GOOD MORNING", "GOOD AFTERNOON", "GOOD EVENING" based on time of day
-- **Live WiFi SSID display** — Shows currently connected network name in pill
-- **Improved D-pad navigation** — Left/Right now switches between app grid and quick panel
-- **Back button support** — Returns from quick panel focus to app grid
-- **Performance optimizations** — Cached DP values, reduced allocations, efficient clock handler
+- **Proper D-pad grid navigation** — Left/Right moves between columns, Up/Down moves between rows
+- **MENU key for panel access** — Deliberate navigation route to quick panel (Inputs/WiFi/Settings)
+- **Fixed navigation bugs** — No longer jumps to panels when pressing RIGHT on last app
+- **Intent-based app launching** — Uses explicit ComponentName for reliable launches
+- **HashSet deduplication** — O(1) duplicate detection during app discovery
+- **Proper clock lifecycle** — Starts on resume, stops on pause, cleans up on destroy
+- **Correct date pattern** — Uses `EEEE, d MMMM yyyy` for full weekday/month/year
+- **Wi-Fi label truncation** — Long SSIDs truncated with ellipsis to prevent overlap
+- **Enhanced focus states** — Better visual feedback with red border and accent bar
+- **Improved scroll calculation** — Consistent viewport with proper clamping
+- **Empty grid row handling** — Safely handles incomplete final rows
 
 ### Changed
-- **Redesigned layout** — Quick pills positioned next to clock at top-right
-- **Enhanced visual feedback** — Better selected state with red border and accent bar
-- **Updated navigation hints** — Footer text reflects new panel-switching behavior
-- **Improved scroll calculation** — More accurate viewport adjustments
+- **Navigation model** — Grid uses columnar navigation, panels accessed via MENU key
+- **Performance optimizations** — Reduced allocations in onDraw(), pre-computed layouts
+- **Code organization** — Extracted AppItem to include activity name for explicit launching
+- **Documentation** — Comprehensive README with testing checklist and compatibility notes
 
 ### Fixed
-- **Fixed Inputs pill crash** — Removed invalid `ACTION_INPUT_SOURCE_SETTINGS` constant
-- **Fixed compilation errors** — Resolved all Java type and method resolution issues
-- **Fixed lint violations** — Addressed API level compatibility warnings
-- **Fixed resource leaks** — Properly clean up Handler callbacks on destroy
+- **D-pad LEFT/RIGHT behavior** — Now correctly navigates columns instead of switching panels
+- **Clock callback leak** — Handler properly cleaned up onPause/onDestroy
+- **Deprecated Date.getHours()** — Using Calendar for hour extraction
+- **Scroll boundary issues** — Correct max scroll calculation prevents overshoot
+- **Card overflow prevention** — Clips draw area to prevent overlap with header/footer
+- **Duplicate app detection** — Uses LinkedHashMap for O(1) lookups instead of O(n²)
+- **Wi-Fi permission handling** — Graceful fallback when SSID access unavailable
+- **Build compatibility** — Fixed Color.argb() calls for proper 4-parameter usage
 
 ### Optimized
-- **Reduced APK size** — 17,873 bytes (~17.5 KB) after R8 minification
-- **Eliminated unnecessary allocations** — Pre-compute string measurements during layout
-- **Cached frequently-used values** — DP conversions, font sizes, layout metrics
-- **Optimized draw loop** — Minimize object creation in `onDraw()`
+- **APK size maintained** — Still under 20 KB after optimizations
+- **Memory efficiency** — Reduced temporary object creation in hot paths
+- **Rendering performance** — Cached DP values, minimized Paint state changes
+- **Layout recalibration** — Efficient recalculation on orientation/size changes
 
 ---
 
-## [1.0.0] — Initial development build
+## [1.0.0] — Initial release
 
-- Create native Java Android TV home activity
-- Dark minimal interface with red accent and clock/date
-- Discover Leanback apps, with launcher-activity fallback
-- Support D-pad navigation and launching apps with OK/Enter
-- Release minification (R8) and resource shrinking enabled
-- Add Gradle wrapper for reproducible builds
-- Add GitHub Actions workflow to build and upload release APK artifact
+### Added
+- Native Java Android TV home launcher
+- Black/red cinematic theme with Deadpool-inspired aesthetics
+- Live digital clock with AM/PM and date display
+- Greeting system (Good Morning/Afternoon/Evening)
+- App discovery via CATEGORY_LEANBACK_LAUNCHER with LAUNCHER fallback
+- D-pad navigation (basic implementation)
+- OK/Enter to launch applications
+- Quick access pills (Inputs, WiFi, Settings) in top-right corner
+- Install/uninstall monitoring via BroadcastReceiver
+- Responsive layout for 720p/1080p/4K displays
+- R8 minification and resource shrinking
+- Gradle wrapper for reproducible builds
+- GitHub Actions CI/CD pipeline
 
 ### Technical Details
 - **Package**: `com.newlauncher.tv`
@@ -55,6 +71,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **AGP Version**: 8.7.3
 - **Gradle Version**: 8.9
 - **Java Version**: 17
+- **APK Size**: ~18 KB (compressed)
 
 ---
 
@@ -62,31 +79,75 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 | Version | Date | APK Size | Key Changes |
 |---------|------|----------|-------------|
-| 1.0.0 | 2024-11-11 | ~17 KB | Initial release with basic launcher functionality |
-| 1.1.0 | 2024-11-11 | ~18 KB | Added quick access panel, greetings, WiFi display |
+| 1.0.0 | 2024-11-11 | ~18 KB | Initial release with basic launcher functionality |
+| 1.1.0 | 2024-11-11 | ~18 KB | Fixed navigation, improved scrolling, added proper lifecycle management |
 
 ---
 
 ## Future Roadmap
 
 ### Planned Features
-- [ ] App search functionality
-- [ ] App pinning/favorites
-- [ ] Multiple page support
-- [ ] Custom wallpaper support
-- [ ] Widget support (weather, news, calendar)
-- [ ] Theme customization (colors, fonts)
-- [ ] Keyboard shortcut support
-- [ ] Remote control mapping configuration
+- [ ] App search with fuzzy matching
+- [ ] App pinning/favorites with SharedPreferences persistence
+- [ ] Multiple page support (horizontal swipe between pages)
+- [ ] Custom wallpaper support (stored in internal storage)
+- [ ] Widget support for leanback-compatible widgets
+- [ ] Theme customization (color accents, card styles)
+- [ ] Keyboard shortcut configuration
+- [ ] Remote control mapping editor
+- [ ] Last-used app tracking and quick access row
 
 ### Performance Goals
 - [ ] Maintain APK size under 20 KB
-- [ ] Optimize rendering for 4K displays
-- [ ] Reduce memory footprint further
-- [ ] Implement lazy loading for icons
+- [ ] Optimize icon loading with bitmap caching
+- [ ] Reduce memory footprint for low-RAM devices (512MB)
+- [ ] Implement virtualization for 100+ app lists
+- [ ] Optimize for 4K@60fps rendering
 
 ### Compatibility Goals
-- [ ] Test on more TV brands (Samsung, LG webOS via bridge)
-- [ ] Support Android TV Go edition
-- [ ] Optimize for low-memory devices (512MB RAM)
+- [ ] Test on more TV brands (Samsung Tizen bridge, LG webOS)
+- [ ] Support Android TV Go edition (reduced feature set)
 - [ ] Test with screen readers and accessibility features
+- [ ] Validate on Android 15 (API 35) edge cases
+
+### Quality Goals
+- [ ] Add unit tests for navigation logic
+- [ ] Implement instrumentation tests with Android Emulator
+- [ ] Add performance benchmarks and regression tests
+- [ ] Create automated APK size tracking
+- [ ] Add code coverage reporting
+
+---
+
+## Testing Matrix
+
+| Platform | Status | Notes |
+|----------|--------|-------|
+| Linux Mint 22.3 (Build) | ✅ Verified | JDK 21, AGP 8.7.3, Gradle 8.9 |
+| Android Emulator (API 35) | ⚠️ Pending | Requires AVD setup |
+| TCL Android TV | ⚠️ Pending | Physical device testing needed |
+| Sony Android TV | ⚠️ Pending | OEM-specific testing needed |
+| Amazon Fire TV | ⚠️ Pending | Modified Android compatibility |
+
+---
+
+## Known Limitations
+
+1. **Physical TV testing not completed** — Build verified, runtime behavior needs TV testing
+2. **OEM restrictions vary** — Some manufacturers block third-party launchers
+3. **No persistent favorites** — Session-only navigation state
+4. **Limited widget support** — Cannot launch non-launcher activities reliably
+5. **No app filtering** — Shows all launchable apps without categorization
+
+---
+
+## Credits
+
+- **Developer**: saranghaeyong
+- **Design Inspiration**: Deadpool cinematic aesthetic
+- **Testing**: Automated build verification only
+- **Community**: Android TV developer documentation
+
+---
+
+*This changelog follows [Keep a Changelog](https://keepachangelog.com/) format.*
