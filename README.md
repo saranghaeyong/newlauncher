@@ -32,9 +32,9 @@ gradle --no-daemon :app:assembleRelease
 
 APK output:
 
-`app/build/outputs/apk/release/app-release-unsigned.apk`
+`app/build/outputs/apk/release/app-release.apk`
 
-The APK is unsigned. Sign it with your own release key before distributing it outside your own test devices.
+The CI APK is signed with the Android debug key so it can be installed for testing. Do not distribute it as a production release; configure a private signing key for public releases.
 
 ## Install with ADB
 
@@ -42,7 +42,7 @@ Connect to the TV with USB debugging / network debugging enabled:
 
 ```bash
 adb connect TV_IP:5555
-adb install -r app/build/outputs/apk/release/app-release-unsigned.apk
+adb install -r app/build/outputs/apk/release/app-release.apk
 ```
 
 Open NewLauncher from the TV's app list, then choose it as the Home app if Android TV offers a launcher chooser. Device manufacturers may restrict changing the default launcher.
